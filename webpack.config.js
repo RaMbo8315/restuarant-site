@@ -3,13 +3,13 @@ const path = require('path');
 const webpack = require('webpack')
 
 const VENDOR_LIBS = [
-  'babel-polyfill', 'redux', 'react-redux', 'react-dom'
+  'hyperapp'
 ]
 
 module.exports = {
   entry: {
-    firstComp: './assets/js/hyper/index.js',
-    // vendor: VENDOR_LIBS
+    hyper: './assets/js/hyper/index.js',
+    vendor: VENDOR_LIBS
   },
   output: { filename: '[name].js',
             path: path.resolve(__dirname, 'public/js/components') },
@@ -21,8 +21,7 @@ module.exports = {
         loader: 'babel-loader',
         options: {
           presets: [
-            [ 'es2015', { modules: false } ],
-            'stage-0', 'react'
+            [ 'es2015', { modules: false } ]
           ]
         }
       },
