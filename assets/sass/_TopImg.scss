@@ -1,6 +1,7 @@
-.TopImg {
+#TopImg {
     background: black;
-    height: 500px;
+    min-height: 500px;
+    height: 100vh;
     background: #000;
     background: linear-gradient(135deg, rgba(0, 0, 0, .1) 0, #002d77 100%);
     background-image: linear-gradient(135deg, rgba(0, 0, 0, .1) 0, #000 100%), url(http://richmondmeatpackers.com/wp-content/uploads/2018/03/flat-iron-steak.jpg);
@@ -17,7 +18,7 @@
             text-transform: uppercase;
             color: white;
             font-weight: 300;
-            font-size: 4rem;
+            font-size: 6rem;
         }
 
         h5 {
@@ -28,25 +29,29 @@
     }
 
     .contact-info {
-        // position: absolute;
-        // bottom: 0;
-        // right: 0;
+        width: 100%;
+        position: absolute;
+        bottom: 50px;
+        right: 0;
         text-align: right;
-        color: white;
+        color: $paragraphColor;
         font-size: 0.8rem;
         line-height: 1.5rem;
 
         strong {
             font-weight: bold;
+            color: $white;
         }
 
         .booking {
             margin-bottom: 10px;
+            color: $paragraphColor;
         }
 
         h2 {
             font-size: 2rem;
             margin-bottom: 20px;
+            color: $white;
         }
     }
 }

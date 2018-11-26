@@ -1,19 +1,19 @@
-import {h, app} from 'hyperapp'
+import { h, app } from 'hyperapp'
 
-export default function Header({state, actions}) {
+export default function Header({ state, actions }) {
   return (
     <header>
       <div className={'container'}>
-      <div className={'logo'}>
-        Logo
-      </div>
-      <nav>
-        <a href={'#'}>Menu</a>
-        <a href={'#'}>Party Platters</a>
-        <a href={'#'}>Locations</a>
-        <a href={'#'}>Rewards</a>
-        <a href={'#'}>Reservations</a>
-      </nav>
+        <div className={'logo'}>
+          Logo
+       </div>
+        <nav>
+          <a href={'#OurStory'}>Our Story</a>
+          <a href={'#Reviews'}>Reviews</a>
+          <a href={'#SpecialMenu'}>Special Menus</a>
+          <a href={'#'}>Reservations</a>
+          <a href={'#ContactUs'}>Contact Us</a>
+        </nav>
       </div>
     </header>
   )

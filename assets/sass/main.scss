@@ -1,11 +1,20 @@
-$textFont: 'Open Sans Condensed', sans-serif;
-$displayFont: 'Rozha One', serif;
-@import url('https://fonts.googleapis.com/css?family=Open+Sans+Condensed:700|PT+Sans:400,700|Rozha+One');
-@import "variables";
 @import "reset";
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|PT+Sans:400,700|Rozha+One');
+@import "variables";
+@import "global";
 @import "grid";
 @import "Header";
 @import "TopImg";
+@import "OurStory";
+@import "SpecialMenu";
+@import "RandomQuote";
+@import "Reviews";
+@import "ContactUs";
+@import "Footer";
+
+html {
+  scroll-behavior: smooth;
+}
 
 body {
   font-family: $textFont;
