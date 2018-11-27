@@ -46,6 +46,9 @@
         .fa-arrow-left.ready,
         .fa-arrow-right.ready {
             color: $black;
+            &:hover {
+                color: $salmon;
+            }
         }
     }
 }

@@ -1,6 +1,24 @@
 import { h, app } from 'hyperapp'
 
 export default function SpecialMenu({ state, actions }) {
+
+    var loopMenu = function () {
+        return state.specialMenuData.map(function (item) {
+            return (
+                <div className={'col-md-4'}>
+                    <div className={'box'}>
+                        <div className={'box-img'}>
+                            <div className={'price-circle'}>{item.price}</div>
+                        </div>
+                        <span className={'title'}>{item.title}</span>
+                        <p className={'details'}>{item.description}
+                        </p>
+                    </div>
+                </div>
+            )
+        })
+    }
+
     return (
         <section id={'SpecialMenu'} className={'texturebg'}>
             <div className={'container'}>
@@ -11,39 +29,7 @@ export default function SpecialMenu({ state, actions }) {
                     Delicious Flavor of autumn
                 </h2>
                 <div className={'row boxes'}>
-                    <div className={'col-md-4'}>
-                        <div className={'box'}>
-                            <div className={'box-img'}>
-                                <div className={'price-circle'}>$25</div>
-                            </div>
-                            <span className={'title'}>Super BBQ Grill No Smoke</span>
-                            <p className={'details'}>Fried eggs, steak, bake potatoe or french fries,
-                                side of vegetables
-                            </p>
-                        </div>
-                    </div>
-                    <div className={'col-md-4'}>
-                        <div className={'box'}>
-                            <div className={'box-img'}>
-                                <div className={'price-circle'}>$25</div>
-                            </div>
-                            <span className={'title'}>Super BBQ Grill No Smoke</span>
-                            <p className={'details'}>Fried eggs, steak, bake potatoe or french fries,
-                                side of vegetables
-                            </p>
-                        </div>
-                    </div>
-                    <div className={'col-md-4'}>
-                        <div className={'box'}>
-                            <div className={'box-img'}>
-                                <div className={'price-circle'}>$25</div>
-                            </div>
-                            <span className={'title'}>Super BBQ Grill No Smoke</span>
-                            <p className={'details'}>Fried eggs, steak, bake potatoe or french fries,
-                                side of vegetables
-                            </p>
-                        </div>
-                    </div>
+                    {loopMenu()}
                 </div>
                 <a href={'#'} className={'link'}>View Full Menu</a>
             </div>

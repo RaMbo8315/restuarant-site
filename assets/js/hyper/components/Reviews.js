@@ -1,6 +1,41 @@
 import { h, app } from 'hyperapp'
 
 export default function Reviews({ state, actions }) {
+
+    var currentReview = function () {
+        return (
+            <div>
+                <h5 className={'comp-title'}>Reviews</h5>
+                <h2>
+                    {state.reviewsData[state.reviewStatus.currentReview].company}
+                </h2>
+                <h4>
+                    "{state.reviewsData[state.reviewStatus.currentReview].highlight}"
+                </h4>
+                <p>
+                    {state.reviewsData[state.reviewStatus.currentReview].review}
+                </p>
+                <div className={'author'}><strong>{state.reviewsData[state.reviewStatus.currentReview].author}</strong> - <em>{state.reviewsData[state.reviewStatus.currentReview].authorInfo}</em></div>
+            </div>
+        )
+    }
+
+    var leftClickBTN = function() {
+        if (state.reviewStatus.currentReview == 0) {
+            console.log('notting')
+        } else {
+            actions.reviewLeftClicked()
+        }
+    }
+
+    var rightClickBTN = function() {
+        if (state.reviewStatus.currentReview == (state.reviewsData.length - 1)) {
+            console.log('notting')
+        } else {
+            actions.reviewRightClicked()
+        }
+    }
+
     return (
         <section id={'Reviews'}>
             <div className={'container'}>
@@ -11,21 +46,14 @@ export default function Reviews({ state, actions }) {
                         </div>
                     </div>
                     <div className={'col-md-4'}>
-                        <h5 className={'comp-title'}>Reviews</h5>
-                        <h2>
-                            The Food Masters Say About Us
-                        </h2>
-                        <h4>
-                            "The Best Restaurant in Orlando!"
-                        </h4>
-                        <p>
-                            Lorem ipsum dolor amet church-key kinfolk tote bag, beard green juice tousled selfies helvetica PBR&B.
-                            Austin hot chicken franzen tumblr glossier chicharrones. Green juice vape neutra shaman.
-                        </p>
-                        <div className={'author'}><strong>Sandra Bennington</strong> - <em>winner of the chef masters</em></div>
+                        {currentReview()}
                         <div className={'arrows'}>
-                            <i class="fas fa-arrow-left" aria-hidden={'true'}></i>
-                            <i class="fas fa-arrow-right ready" aria-hidden={'true'}></i>
+                            <i class={`fas fa-arrow-left ${(state.reviewStatus.currentReview > 0) 
+                            ? 'ready' : ''}`} aria-hidden={'true'}
+                            onclick={leftClickBTN}></i>
+                            <i class={`fas fa-arrow-right ${(state.reviewStatus.currentReview == 
+                            (state.reviewsData.length - 1)) ? '' : 'ready'}`} aria-hidden={'true'}
+                            onclick={rightClickBTN}></i>
                         </div>
                     </div>
                 </div>

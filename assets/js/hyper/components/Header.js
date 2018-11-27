@@ -12,11 +12,12 @@ export default function Header({ state, actions }) {
           <a href={'#Reviews'}>Reviews</a>
           <a href={'#SpecialMenu'}>Special Menus</a>
           <a href={'#'}>Reservations</a>
+          <a href={'#Promotions'}>Promotions</a>
           <a href={'#ContactUs'}>Contact Us</a>
+          <a href={'#Map'}>Map</a>
         </nav>
       </div>
     </header>
   )
 }
-// <Header state={state} actions={actions}/>
-// <Button state={state} actions={actions}/>
+

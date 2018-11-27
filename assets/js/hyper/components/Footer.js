@@ -9,6 +9,7 @@ export default function Footer({ state, actions }) {
                     <a href={'#Reviews'}>Reviews</a>
                     <a href={'#SpecialMenu'}>Special Menus</a>
                     <a href={'#'}>Reservations</a>
+                    <a href={'#Promotions'}>Promotions</a>
                     <a href={'#ContactUs'}>Contact Us</a>
                 </nav>
                 <ul className={'social-media'}>

@@ -1,14 +1,22 @@
 #ContactUs {
-    padding: 100px 0;
+    padding: 10px 0 0;
 
-    h2,
-    h5 {
-        text-align: center;
+    .head {
+        margin-bottom: -105px;
+        h2,
+        h5 {
+            text-align: center;
+        }
     }
 
     .box {
+        width: 80%;
         padding: 70px;
         background: white;
+        position: relative;
+        top: 100px;
+        left: 10%;
+        z-index: 20;
 
         .title {
             font-size: 2rem;
@@ -27,6 +35,7 @@
         p {
             font-weight: 400;
             margin-bottom: 20px;
+
             strong {
                 color: $black;
                 text-transform: capitalize;
@@ -37,6 +46,7 @@
                 color: $paragraphColor;
                 text-decoration: none;
                 font-weight: 600;
+
                 &:hover {
                     color: $salmon;
                 }

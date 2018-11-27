@@ -4,7 +4,7 @@ import {globalState} from './state/globalState.js'
 import App from './components/App.js'
 
 app({
-  state: {globalState},
+  state: globalState,
   view: (state, actions) => <App state={state} actions={actions} />,
   root: document.getElementById('app'),
   actions,
@@ -16,7 +16,6 @@ app({
       console.groupEnd()
     },
     load(state, actions) {
-      actions.intro()
     }
   }
 })

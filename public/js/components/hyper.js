@@ -9,22 +9,26 @@ webpackJsonp([0],[
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var actions = exports.actions = {
-  up: up,
-  intro: intro,
-  showMenu: showMenu
+var reviewLeftClicked = function reviewLeftClicked(state, actions) {
+  return {
+    reviewStatus: {
+      currentReview: state.reviewStatus.currentReview - 1
+    }
+  };
 };
 
-function up(state, actions) {
-  return { count: state.count + 1 };
-}
+var reviewRightClicked = function reviewRightClicked(state, actions) {
+  return {
+    reviewStatus: {
+      currentReview: state.reviewStatus.currentReview + 1
+    }
+  };
+};
 
-function showMenu() {}
-
-function intro(state, actions) {
-  console.log('Just ran my first action');
-  return { count: state.count + 1 };
-}
+var actions = exports.actions = {
+  reviewLeftClicked: reviewLeftClicked,
+  reviewRightClicked: reviewRightClicked
+};
 
 /***/ }),
 /* 2 */
@@ -44,29 +48,37 @@ var _Header = __webpack_require__(6);
 
 var _Header2 = _interopRequireDefault(_Header);
 
-var _TopImg = __webpack_require__(11);
+var _TopImg = __webpack_require__(13);
 
 var _TopImg2 = _interopRequireDefault(_TopImg);
 
-var _OurStory = __webpack_require__(7);
+var _OurStory = __webpack_require__(8);
 
 var _OurStory2 = _interopRequireDefault(_OurStory);
 
-var _SpecialMenu = __webpack_require__(10);
+var _SpecialMenu = __webpack_require__(12);
 
 var _SpecialMenu2 = _interopRequireDefault(_SpecialMenu);
 
-var _RandomQuote = __webpack_require__(8);
+var _RandomQuote = __webpack_require__(10);
 
 var _RandomQuote2 = _interopRequireDefault(_RandomQuote);
 
-var _Reviews = __webpack_require__(9);
+var _Reviews = __webpack_require__(11);
 
 var _Reviews2 = _interopRequireDefault(_Reviews);
+
+var _Promotions = __webpack_require__(9);
+
+var _Promotions2 = _interopRequireDefault(_Promotions);
 
 var _ContactUs = __webpack_require__(4);
 
 var _ContactUs2 = _interopRequireDefault(_ContactUs);
+
+var _Map = __webpack_require__(7);
+
+var _Map2 = _interopRequireDefault(_Map);
 
 var _Footer = __webpack_require__(5);
 
@@ -87,7 +99,9 @@ function App(_ref) {
     (0, _hyperapp.h)(_SpecialMenu2.default, { state: state, actions: actions }),
     (0, _hyperapp.h)(_RandomQuote2.default, { state: state, actions: actions }),
     (0, _hyperapp.h)(_Reviews2.default, { state: state, actions: actions }),
+    (0, _hyperapp.h)(_Promotions2.default, { state: state, actions: actions }),
     (0, _hyperapp.h)(_ContactUs2.default, { state: state, actions: actions }),
+    (0, _hyperapp.h)(_Map2.default, { state: state, actions: actions }),
     (0, _hyperapp.h)(_Footer2.default, { state: state, actions: actions })
   );
 }
@@ -102,8 +116,83 @@ function App(_ref) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+var companyInfo = {
+  title: "Prime Steak Restaurant",
+  phone: "(407) 963 - 7465",
+  location: "605 Orange Ave, Orlando, Fl 32806"
+};
+
+var specialMenuData = [{
+  title: "Super BBQ Grill No Smoke",
+  description: "Fried eggs, steak, baked potato or french fries, side of vegetables.",
+  price: 25
+}, {
+  title: "Chicken Fingers",
+  description: "Fried eggs, steak, baked potato or french fries, side of vegetables.",
+  price: 25
+}, {
+  title: "All American Hamburger",
+  description: "Fried eggs, steak, baked potato or french fries, side of vegetables.",
+  price: 25
+}];
+
+var reviewsData = [{
+  company: "The Food Network",
+  author: "Sandra Bennington",
+  authorInfo: "#1 Chef in America",
+  highlight: "Best Restaurant in Orlando!",
+  review: "Lorem ipsum dolor amet church-key kinfolk tote bag, beard green juice tousled selfies helvetica PBR&B.n\
+    Austin hot chicken franzen tumblr glossier chicharrones. Green juice vape neutra shaman."
+}, {
+  company: "Master Chefs",
+  author: "Janice Gillingham",
+  authorInfo: "Winner of The Chef Masters",
+  highlight: "They know Steak",
+  review: "Lorem ipsum dolor amet church-key kinfolk tote bag, beard green juice tousled selfies helvetica PBR&B.n\
+    Austin hot chicken franzen tumblr glossier chicharrones. Green juice vape neutra shaman."
+}, {
+  company: "The Cooking Channel",
+  author: "Aubrey Williams",
+  authorInfo: 'Host of "From the Nose to the Tummy"',
+  highlight: "#1 guess of the Year",
+  review: "Lorem ipsum dolor amet church-key kinfolk tote bag, beard green juice tousled selfies helvetica PBR&B.n\
+    Austin hot chicken franzen tumblr glossier chicharrones. Green juice vape neutra shaman."
+}, {
+  company: "Grillin' and Chillin'",
+  author: "Daryl Courtney",
+  authorInfo: "Grill Master 2018",
+  highlight: "From the Stove to the Grill These Guys Can Cook",
+  review: "Lorem ipsum dolor amet church-key kinfolk tote bag, beard green juice tousled selfies helvetica PBR&B.n\
+    Austin hot chicken franzen tumblr glossier chicharrones. Green juice vape neutra shaman."
+}, {
+  company: "Masters of Fire",
+  author: "Jacob Smith",
+  authorInfo: "International Chef",
+  highlight: "Best Restaurant in The South East!",
+  review: "Lorem ipsum dolor amet church-key kinfolk tote bag, beard green juice tousled selfies helvetica PBR&B.n\
+    Austin hot chicken franzen tumblr glossier chicharrones. Green juice vape neutra shaman."
+}];
+
+var randomQuoteData = [{
+  author: "Charles",
+  quote: "Good Painting Is Like Good Cooking; It Can Be Tasted, But Not Explained."
+}, {
+  author: "John",
+  quote: "I don't always eat out; but when I do I eat here"
+}, {
+  author: "Jill",
+  quote: "When I eat here I feel so golden"
+}];
+
 var globalState = exports.globalState = {
-  count: 0
+  count: 0,
+  companyInfo: companyInfo,
+  specialMenuData: specialMenuData,
+  reviewsData: reviewsData,
+  randomQuoteData: randomQuoteData,
+  reviewStatus: {
+    currentReview: 0
+  }
 };
 
 /***/ }),
@@ -131,14 +220,18 @@ function ContactUs(_ref) {
       'div',
       { className: 'container' },
       (0, _hyperapp.h)(
-        'h5',
-        null,
-        'Contact Us'
-      ),
-      (0, _hyperapp.h)(
-        'h2',
-        null,
-        'Delicious Flavors of Autumn'
+        'div',
+        { className: 'head' },
+        (0, _hyperapp.h)(
+          'h5',
+          null,
+          'Contact Us'
+        ),
+        (0, _hyperapp.h)(
+          'h2',
+          null,
+          'We\'re Always Here To Help'
+        )
       ),
       (0, _hyperapp.h)(
         'div',
@@ -157,9 +250,9 @@ function ContactUs(_ref) {
             (0, _hyperapp.h)(
               'h6',
               { className: 'Address' },
-              '605 Orange Ave, ',
+              '605 S. Orange Ave, ',
               (0, _hyperapp.h)('br', null),
-              'Orlando, Fl 32806'
+              'Orlando, Fl 32801'
             ),
             (0, _hyperapp.h)(
               'p',
@@ -267,6 +360,11 @@ function Footer(_ref) {
                     'a',
                     { href: '#' },
                     'Reservations'
+                ),
+                (0, _hyperapp.h)(
+                    'a',
+                    { href: '#Promotions' },
+                    'Promotions'
                 ),
                 (0, _hyperapp.h)(
                     'a',
@@ -378,18 +476,55 @@ function Header(_ref) {
         ),
         (0, _hyperapp.h)(
           'a',
+          { href: '#Promotions' },
+          'Promotions'
+        ),
+        (0, _hyperapp.h)(
+          'a',
           { href: '#ContactUs' },
           'Contact Us'
+        ),
+        (0, _hyperapp.h)(
+          'a',
+          { href: '#Map' },
+          'Map'
         )
       )
     )
   );
 }
-// <Header state={state} actions={actions}/>
-// <Button state={state} actions={actions}/>
 
 /***/ }),
 /* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = Map;
+
+var _hyperapp = __webpack_require__(0);
+
+function Map(_ref) {
+    var state = _ref.state,
+        actions = _ref.actions;
+
+    return (0, _hyperapp.h)(
+        'section',
+        { id: 'Map' },
+        (0, _hyperapp.h)(
+            'div',
+            { className: 'full-map' },
+            (0, _hyperapp.h)('img', { src: '/img/map.png' })
+        )
+    );
+}
+
+/***/ }),
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -460,7 +595,151 @@ function OurStory(_ref) {
 }
 
 /***/ }),
-/* 8 */
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = Promotions;
+
+var _hyperapp = __webpack_require__(0);
+
+function Promotions(_ref) {
+    var state = _ref.state,
+        actions = _ref.actions;
+
+    return (0, _hyperapp.h)(
+        'section',
+        { id: 'Promotions', 'class': 'texturebg' },
+        (0, _hyperapp.h)(
+            'div',
+            { className: 'container' },
+            (0, _hyperapp.h)(
+                'h5',
+                { className: 'comp-title' },
+                'Our News'
+            ),
+            (0, _hyperapp.h)(
+                'h2',
+                null,
+                'Promotions & Events'
+            ),
+            (0, _hyperapp.h)(
+                'div',
+                { className: 'row' },
+                (0, _hyperapp.h)(
+                    'div',
+                    { className: 'col-md-4' },
+                    (0, _hyperapp.h)(
+                        'div',
+                        { className: 'promo-img' },
+                        (0, _hyperapp.h)('img', { src: '/img/italian.jpg' })
+                    ),
+                    (0, _hyperapp.h)(
+                        'div',
+                        { className: 'content' },
+                        (0, _hyperapp.h)(
+                            'h5',
+                            null,
+                            'Best Sauteed ',
+                            (0, _hyperapp.h)('br', null),
+                            'Onions - Let\'s Enjoy!'
+                        ),
+                        (0, _hyperapp.h)(
+                            'p',
+                            { className: 'dash' },
+                            '--------'
+                        ),
+                        (0, _hyperapp.h)(
+                            'p',
+                            null,
+                            '596 N. Orange Ave, Orlando, FL 32806',
+                            (0, _hyperapp.h)('br', null),
+                            '10am - 3pm ',
+                            (0, _hyperapp.h)('br', null),
+                            ' Monday, Feb. 26, 2019'
+                        )
+                    )
+                ),
+                (0, _hyperapp.h)(
+                    'div',
+                    { className: 'col-md-4' },
+                    (0, _hyperapp.h)(
+                        'div',
+                        { className: 'content' },
+                        (0, _hyperapp.h)(
+                            'h5',
+                            null,
+                            'Become A Super Chef So ',
+                            (0, _hyperapp.h)('br', null),
+                            'Easy With Us'
+                        ),
+                        (0, _hyperapp.h)(
+                            'p',
+                            { className: 'dash' },
+                            '--------'
+                        ),
+                        (0, _hyperapp.h)(
+                            'p',
+                            null,
+                            '256 Delaney Ave, Orlando, FL 32806',
+                            (0, _hyperapp.h)('br', null),
+                            '12pm - 4pm ',
+                            (0, _hyperapp.h)('br', null),
+                            ' Saturday, Mar. 18, 2019'
+                        )
+                    ),
+                    (0, _hyperapp.h)(
+                        'div',
+                        { className: 'promo-img' },
+                        (0, _hyperapp.h)('img', { src: '/img/chef.jpg' })
+                    )
+                ),
+                (0, _hyperapp.h)(
+                    'div',
+                    { className: 'col-md-4' },
+                    (0, _hyperapp.h)(
+                        'div',
+                        { className: 'promo-img' },
+                        (0, _hyperapp.h)('img', { src: '/img/restaurant.jpg' })
+                    ),
+                    (0, _hyperapp.h)(
+                        'div',
+                        { className: 'content' },
+                        (0, _hyperapp.h)(
+                            'h5',
+                            null,
+                            'Art Photography In ',
+                            (0, _hyperapp.h)('br', null),
+                            'Foody'
+                        ),
+                        (0, _hyperapp.h)(
+                            'p',
+                            { className: 'dash' },
+                            '--------'
+                        ),
+                        (0, _hyperapp.h)(
+                            'p',
+                            null,
+                            '4512 N. Orange Ave, Orlando, FL 32806',
+                            (0, _hyperapp.h)('br', null),
+                            '6pm - 9pm ',
+                            (0, _hyperapp.h)('br', null),
+                            ' Friday, Jun. 21, 2019'
+                        )
+                    )
+                )
+            )
+        )
+    );
+}
+
+/***/ }),
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -500,7 +779,7 @@ function RandomQuote(_ref) {
 }
 
 /***/ }),
-/* 9 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -516,6 +795,67 @@ var _hyperapp = __webpack_require__(0);
 function Reviews(_ref) {
     var state = _ref.state,
         actions = _ref.actions;
+
+
+    var currentReview = function currentReview() {
+        return (0, _hyperapp.h)(
+            'div',
+            null,
+            (0, _hyperapp.h)(
+                'h5',
+                { className: 'comp-title' },
+                'Reviews'
+            ),
+            (0, _hyperapp.h)(
+                'h2',
+                null,
+                state.reviewsData[state.reviewStatus.currentReview].company
+            ),
+            (0, _hyperapp.h)(
+                'h4',
+                null,
+                '"',
+                state.reviewsData[state.reviewStatus.currentReview].highlight,
+                '"'
+            ),
+            (0, _hyperapp.h)(
+                'p',
+                null,
+                state.reviewsData[state.reviewStatus.currentReview].review
+            ),
+            (0, _hyperapp.h)(
+                'div',
+                { className: 'author' },
+                (0, _hyperapp.h)(
+                    'strong',
+                    null,
+                    state.reviewsData[state.reviewStatus.currentReview].author
+                ),
+                ' - ',
+                (0, _hyperapp.h)(
+                    'em',
+                    null,
+                    state.reviewsData[state.reviewStatus.currentReview].authorInfo
+                )
+            )
+        );
+    };
+
+    var leftClickBTN = function leftClickBTN() {
+        if (state.reviewStatus.currentReview == 0) {
+            console.log('notting');
+        } else {
+            actions.reviewLeftClicked();
+        }
+    };
+
+    var rightClickBTN = function rightClickBTN() {
+        if (state.reviewStatus.currentReview == state.reviewsData.length - 1) {
+            console.log('notting');
+        } else {
+            actions.reviewRightClicked();
+        }
+    };
 
     return (0, _hyperapp.h)(
         'section',
@@ -538,46 +878,14 @@ function Reviews(_ref) {
                 (0, _hyperapp.h)(
                     'div',
                     { className: 'col-md-4' },
-                    (0, _hyperapp.h)(
-                        'h5',
-                        { className: 'comp-title' },
-                        'Reviews'
-                    ),
-                    (0, _hyperapp.h)(
-                        'h2',
-                        null,
-                        'The Food Masters Say About Us'
-                    ),
-                    (0, _hyperapp.h)(
-                        'h4',
-                        null,
-                        '"The Best Restaurant in Orlando!"'
-                    ),
-                    (0, _hyperapp.h)(
-                        'p',
-                        null,
-                        'Lorem ipsum dolor amet church-key kinfolk tote bag, beard green juice tousled selfies helvetica PBR&B. Austin hot chicken franzen tumblr glossier chicharrones. Green juice vape neutra shaman.'
-                    ),
-                    (0, _hyperapp.h)(
-                        'div',
-                        { className: 'author' },
-                        (0, _hyperapp.h)(
-                            'strong',
-                            null,
-                            'Sandra Bennington'
-                        ),
-                        ' - ',
-                        (0, _hyperapp.h)(
-                            'em',
-                            null,
-                            'winner of the chef masters'
-                        )
-                    ),
+                    currentReview(),
                     (0, _hyperapp.h)(
                         'div',
                         { className: 'arrows' },
-                        (0, _hyperapp.h)('i', { 'class': 'fas fa-arrow-left', 'aria-hidden': 'true' }),
-                        (0, _hyperapp.h)('i', { 'class': 'fas fa-arrow-right ready', 'aria-hidden': 'true' })
+                        (0, _hyperapp.h)('i', { 'class': 'fas fa-arrow-left ' + (state.reviewStatus.currentReview > 0 ? 'ready' : ''), 'aria-hidden': 'true',
+                            onclick: leftClickBTN }),
+                        (0, _hyperapp.h)('i', { 'class': 'fas fa-arrow-right ' + (state.reviewStatus.currentReview == state.reviewsData.length - 1 ? '' : 'ready'), 'aria-hidden': 'true',
+                            onclick: rightClickBTN })
                     )
                 )
             )
@@ -586,7 +894,7 @@ function Reviews(_ref) {
 }
 
 /***/ }),
-/* 10 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -602,6 +910,39 @@ var _hyperapp = __webpack_require__(0);
 function SpecialMenu(_ref) {
     var state = _ref.state,
         actions = _ref.actions;
+
+
+    var loopMenu = function loopMenu() {
+        return state.specialMenuData.map(function (item) {
+            return (0, _hyperapp.h)(
+                'div',
+                { className: 'col-md-4' },
+                (0, _hyperapp.h)(
+                    'div',
+                    { className: 'box' },
+                    (0, _hyperapp.h)(
+                        'div',
+                        { className: 'box-img' },
+                        (0, _hyperapp.h)(
+                            'div',
+                            { className: 'price-circle' },
+                            item.price
+                        )
+                    ),
+                    (0, _hyperapp.h)(
+                        'span',
+                        { className: 'title' },
+                        item.title
+                    ),
+                    (0, _hyperapp.h)(
+                        'p',
+                        { className: 'details' },
+                        item.description
+                    )
+                )
+            );
+        });
+    };
 
     return (0, _hyperapp.h)(
         'section',
@@ -622,87 +963,7 @@ function SpecialMenu(_ref) {
             (0, _hyperapp.h)(
                 'div',
                 { className: 'row boxes' },
-                (0, _hyperapp.h)(
-                    'div',
-                    { className: 'col-md-4' },
-                    (0, _hyperapp.h)(
-                        'div',
-                        { className: 'box' },
-                        (0, _hyperapp.h)(
-                            'div',
-                            { className: 'box-img' },
-                            (0, _hyperapp.h)(
-                                'div',
-                                { className: 'price-circle' },
-                                '$25'
-                            )
-                        ),
-                        (0, _hyperapp.h)(
-                            'span',
-                            { className: 'title' },
-                            'Super BBQ Grill No Smoke'
-                        ),
-                        (0, _hyperapp.h)(
-                            'p',
-                            { className: 'details' },
-                            'Fried eggs, steak, bake potatoe or french fries, side of vegetables'
-                        )
-                    )
-                ),
-                (0, _hyperapp.h)(
-                    'div',
-                    { className: 'col-md-4' },
-                    (0, _hyperapp.h)(
-                        'div',
-                        { className: 'box' },
-                        (0, _hyperapp.h)(
-                            'div',
-                            { className: 'box-img' },
-                            (0, _hyperapp.h)(
-                                'div',
-                                { className: 'price-circle' },
-                                '$25'
-                            )
-                        ),
-                        (0, _hyperapp.h)(
-                            'span',
-                            { className: 'title' },
-                            'Super BBQ Grill No Smoke'
-                        ),
-                        (0, _hyperapp.h)(
-                            'p',
-                            { className: 'details' },
-                            'Fried eggs, steak, bake potatoe or french fries, side of vegetables'
-                        )
-                    )
-                ),
-                (0, _hyperapp.h)(
-                    'div',
-                    { className: 'col-md-4' },
-                    (0, _hyperapp.h)(
-                        'div',
-                        { className: 'box' },
-                        (0, _hyperapp.h)(
-                            'div',
-                            { className: 'box-img' },
-                            (0, _hyperapp.h)(
-                                'div',
-                                { className: 'price-circle' },
-                                '$25'
-                            )
-                        ),
-                        (0, _hyperapp.h)(
-                            'span',
-                            { className: 'title' },
-                            'Super BBQ Grill No Smoke'
-                        ),
-                        (0, _hyperapp.h)(
-                            'p',
-                            { className: 'details' },
-                            'Fried eggs, steak, bake potatoe or french fries, side of vegetables'
-                        )
-                    )
-                )
+                loopMenu()
             ),
             (0, _hyperapp.h)(
                 'a',
@@ -714,7 +975,7 @@ function SpecialMenu(_ref) {
 }
 
 /***/ }),
-/* 11 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -748,9 +1009,7 @@ function TopImg(_ref) {
         (0, _hyperapp.h)(
           'h1',
           null,
-          'Prime Steak',
-          (0, _hyperapp.h)('br', null),
-          'Restaurant'
+          state.companyInfo.title
         )
       ),
       (0, _hyperapp.h)(
@@ -793,7 +1052,7 @@ function TopImg(_ref) {
 }
 
 /***/ }),
-/* 12 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -812,7 +1071,7 @@ var _App2 = _interopRequireDefault(_App);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 (0, _hyperapp.app)({
-  state: { globalState: _globalState.globalState },
+  state: _globalState.globalState,
   view: function view(state, actions) {
     return (0, _hyperapp.h)(_App2.default, { state: state, actions: actions });
   },
@@ -828,11 +1087,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
       console.log("Data:", data);
       console.groupEnd();
     },
-    load: function load(state, actions) {
-      actions.intro();
-    }
+    load: function load(state, actions) {}
   }
 });
 
 /***/ })
-],[12]);
+],[14]);
