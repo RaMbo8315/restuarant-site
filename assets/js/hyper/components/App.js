@@ -9,6 +9,7 @@ import Promotions from './Promotions.js'
 import ContactUs from './ContactUs.js'
 import Map from './Map.js'
 import Footer from './Footer.js'
+import TopBTN from './TopBTN.js'
 
 export default function App({state, actions}) {
   return (
@@ -23,6 +24,7 @@ export default function App({state, actions}) {
       <ContactUs state={state} actions={actions}/>
       <Map state={state} actions={actions}/>
       <Footer state={state} actions={actions}/>
+      <TopBTN state={state} actions={actions}/>
     </div>
   )
 }

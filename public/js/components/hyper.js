@@ -25,9 +25,27 @@ var reviewRightClicked = function reviewRightClicked(state, actions) {
   };
 };
 
+var quotePicker = function quotePicker(state, actions) {
+  return {
+    quoteStatus: {
+      currentQuote: state.quoteStatus.currentQuote + 1
+    }
+  };
+};
+
+var quoteReset = function quoteReset(state, actions) {
+  return {
+    quoteStatus: {
+      currentQuote: 0
+    }
+  };
+};
+
 var actions = exports.actions = {
   reviewLeftClicked: reviewLeftClicked,
-  reviewRightClicked: reviewRightClicked
+  reviewRightClicked: reviewRightClicked,
+  quotePicker: quotePicker,
+  quoteReset: quoteReset
 };
 
 /***/ }),
@@ -48,7 +66,7 @@ var _Header = __webpack_require__(6);
 
 var _Header2 = _interopRequireDefault(_Header);
 
-var _TopImg = __webpack_require__(13);
+var _TopImg = __webpack_require__(14);
 
 var _TopImg2 = _interopRequireDefault(_TopImg);
 
@@ -84,6 +102,10 @@ var _Footer = __webpack_require__(5);
 
 var _Footer2 = _interopRequireDefault(_Footer);
 
+var _TopBTN = __webpack_require__(13);
+
+var _TopBTN2 = _interopRequireDefault(_TopBTN);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function App(_ref) {
@@ -102,7 +124,8 @@ function App(_ref) {
     (0, _hyperapp.h)(_Promotions2.default, { state: state, actions: actions }),
     (0, _hyperapp.h)(_ContactUs2.default, { state: state, actions: actions }),
     (0, _hyperapp.h)(_Map2.default, { state: state, actions: actions }),
-    (0, _hyperapp.h)(_Footer2.default, { state: state, actions: actions })
+    (0, _hyperapp.h)(_Footer2.default, { state: state, actions: actions }),
+    (0, _hyperapp.h)(_TopBTN2.default, { state: state, actions: actions })
   );
 }
 
@@ -192,6 +215,9 @@ var globalState = exports.globalState = {
   randomQuoteData: randomQuoteData,
   reviewStatus: {
     currentReview: 0
+  },
+  quoteStatus: {
+    currentQuote: 0
   }
 };
 
@@ -645,9 +671,9 @@ function Promotions(_ref) {
                         (0, _hyperapp.h)(
                             'h5',
                             null,
-                            'Best Sauteed ',
+                            'Art Photography In ',
                             (0, _hyperapp.h)('br', null),
-                            'Onions - Let\'s Enjoy!'
+                            'Foody'
                         ),
                         (0, _hyperapp.h)(
                             'p',
@@ -713,9 +739,9 @@ function Promotions(_ref) {
                         (0, _hyperapp.h)(
                             'h5',
                             null,
-                            'Art Photography In ',
+                            'Best Sauteed ',
                             (0, _hyperapp.h)('br', null),
-                            'Foody'
+                            'Onions - Let\'s Enjoy!'
                         ),
                         (0, _hyperapp.h)(
                             'p',
@@ -756,6 +782,18 @@ function RandomQuote(_ref) {
   var state = _ref.state,
       actions = _ref.actions;
 
+
+  var quotes = function quotes() {
+    console.log(state.quoteStatus.currentQuote);
+    if (state.quoteStatus.currentQuote <= 2) {
+      actions.quotePicker();
+    } else if (state.quoteStatus.currentQuote == 2) {
+      actions.quoteReset();
+    }
+  };
+
+  var quoteScroll = setInterval(quotes, 5000);
+
   return (0, _hyperapp.h)(
     'section',
     { id: 'RandomQuote', style: {
@@ -767,12 +805,16 @@ function RandomQuote(_ref) {
       (0, _hyperapp.h)(
         'h1',
         null,
-        '"Good painting is like good cooking; it can be tasted, but not explained."'
+        '"',
+        state.randomQuoteData[state.quoteStatus.currentQuote].quote,
+        '"'
       ),
       (0, _hyperapp.h)(
         'span',
         { className: 'author' },
-        '- Charles -'
+        '- ',
+        state.randomQuoteData[state.quoteStatus.currentQuote].author,
+        ' -'
       )
     )
   );
@@ -842,17 +884,13 @@ function Reviews(_ref) {
     };
 
     var leftClickBTN = function leftClickBTN() {
-        if (state.reviewStatus.currentReview == 0) {
-            console.log('notting');
-        } else {
+        if (state.reviewStatus.currentReview == 0) {} else {
             actions.reviewLeftClicked();
         }
     };
 
     var rightClickBTN = function rightClickBTN() {
-        if (state.reviewStatus.currentReview == state.reviewsData.length - 1) {
-            console.log('notting');
-        } else {
+        if (state.reviewStatus.currentReview == state.reviewsData.length - 1) {} else {
             actions.reviewRightClicked();
         }
     };
@@ -882,9 +920,9 @@ function Reviews(_ref) {
                     (0, _hyperapp.h)(
                         'div',
                         { className: 'arrows' },
-                        (0, _hyperapp.h)('i', { 'class': 'fas fa-arrow-left ' + (state.reviewStatus.currentReview > 0 ? 'ready' : ''), 'aria-hidden': 'true',
+                        (0, _hyperapp.h)('i', { 'class': 'fas fa-arrow-left ' + (state.reviewStatus.currentReview > 0 ? 'ready' : 'cursor'), 'aria-hidden': 'true',
                             onclick: leftClickBTN }),
-                        (0, _hyperapp.h)('i', { 'class': 'fas fa-arrow-right ' + (state.reviewStatus.currentReview == state.reviewsData.length - 1 ? '' : 'ready'), 'aria-hidden': 'true',
+                        (0, _hyperapp.h)('i', { 'class': 'fas fa-arrow-right ' + (state.reviewStatus.currentReview == state.reviewsData.length - 1 ? 'cursor' : 'ready'), 'aria-hidden': 'true',
                             onclick: rightClickBTN })
                     )
                 )
@@ -982,6 +1020,44 @@ function SpecialMenu(_ref) {
 
 
 Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = TopBTN;
+
+var _hyperapp = __webpack_require__(0);
+
+function TopBTN(_ref) {
+    var state = _ref.state,
+        actions = _ref.actions;
+
+
+    document.onscroll = function () {
+        if (document.documentElement.scrollTop != 0) {
+            document.getElementById('top-arrow').style.opacity = .8;
+        } else {
+            document.getElementById('top-arrow').style.opacity = 0;
+        }
+    };
+
+    return (0, _hyperapp.h)(
+        'div',
+        { id: 'topBTN' },
+        (0, _hyperapp.h)(
+            'a',
+            { href: '#TopImg' },
+            (0, _hyperapp.h)('i', { id: 'top-arrow', 'class': 'fas fa-arrow-up' })
+        )
+    );
+}
+
+/***/ }),
+/* 14 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = TopImg;
@@ -1052,7 +1128,7 @@ function TopImg(_ref) {
 }
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1092,4 +1168,4 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 });
 
 /***/ })
-],[14]);
+],[15]);

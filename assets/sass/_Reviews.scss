@@ -50,5 +50,10 @@
                 color: $salmon;
             }
         }
+
+        .fa-arrow-left.cursor,
+        .fa-arrow-right.cursor {
+            cursor: default;
+        }
     }
 }

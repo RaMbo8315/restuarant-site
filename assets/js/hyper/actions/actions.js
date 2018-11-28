@@ -14,9 +14,27 @@ var reviewRightClicked = function(state, actions) {
   })
 }
 
+var quotePicker = function(state, actions) {
+  return ({
+    quoteStatus: {
+      currentQuote: state.quoteStatus.currentQuote + 1,
+    }
+  })
+}
+
+var quoteReset = function(state, actions) {
+  return ({
+    quoteStatus: {
+      currentQuote: 0,
+    }
+  })
+}
+
 
 export const actions = {
   reviewLeftClicked,
   reviewRightClicked,
+  quotePicker,
+  quoteReset
 }
 

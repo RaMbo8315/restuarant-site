@@ -89,5 +89,8 @@ export const globalState = {
   randomQuoteData,
   reviewStatus: {
     currentReview: 0,
+  },
+  quoteStatus: {
+    currentQuote: 0,
   }
 }

@@ -17,7 +17,7 @@ export default function Promotions({ state, actions }) {
                         </div>
                         <div className={'content'}>
                             <h5>
-                                Best Sauteed <br />Onions - Let's Enjoy!
+                                Art Photography In <br />Foody
                             </h5>
                             <p className={'dash'}>--------</p>
                             <p>
@@ -47,7 +47,7 @@ export default function Promotions({ state, actions }) {
                         </div>
                         <div className={'content'}>
                             <h5>
-                                Art Photography In <br />Foody
+                                Best Sauteed <br />Onions - Let's Enjoy!
                             </h5>
                             <p className={'dash'}>--------</p>
                             <p>

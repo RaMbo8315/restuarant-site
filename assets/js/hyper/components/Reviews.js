@@ -22,7 +22,6 @@ export default function Reviews({ state, actions }) {
 
     var leftClickBTN = function() {
         if (state.reviewStatus.currentReview == 0) {
-            console.log('notting')
         } else {
             actions.reviewLeftClicked()
         }
@@ -30,7 +29,6 @@ export default function Reviews({ state, actions }) {
 
     var rightClickBTN = function() {
         if (state.reviewStatus.currentReview == (state.reviewsData.length - 1)) {
-            console.log('notting')
         } else {
             actions.reviewRightClicked()
         }
@@ -49,10 +47,10 @@ export default function Reviews({ state, actions }) {
                         {currentReview()}
                         <div className={'arrows'}>
                             <i class={`fas fa-arrow-left ${(state.reviewStatus.currentReview > 0) 
-                            ? 'ready' : ''}`} aria-hidden={'true'}
+                            ? 'ready' : 'cursor'}`} aria-hidden={'true'}
                             onclick={leftClickBTN}></i>
                             <i class={`fas fa-arrow-right ${(state.reviewStatus.currentReview == 
-                            (state.reviewsData.length - 1)) ? '' : 'ready'}`} aria-hidden={'true'}
+                            (state.reviewsData.length - 1)) ? 'cursor' : 'ready'}`} aria-hidden={'true'}
                             onclick={rightClickBTN}></i>
                         </div>
                     </div>
