@@ -25,27 +25,9 @@ var reviewRightClicked = function reviewRightClicked(state, actions) {
   };
 };
 
-var quotePicker = function quotePicker(state, actions) {
-  return {
-    quoteStatus: {
-      currentQuote: state.quoteStatus.currentQuote + 1
-    }
-  };
-};
-
-var quoteReset = function quoteReset(state, actions) {
-  return {
-    quoteStatus: {
-      currentQuote: 0
-    }
-  };
-};
-
 var actions = exports.actions = {
   reviewLeftClicked: reviewLeftClicked,
-  reviewRightClicked: reviewRightClicked,
-  quotePicker: quotePicker,
-  quoteReset: quoteReset
+  reviewRightClicked: reviewRightClicked
 };
 
 /***/ }),
@@ -198,13 +180,16 @@ var reviewsData = [{
 
 var randomQuoteData = [{
   author: "Charles",
-  quote: "Good Painting Is Like Good Cooking; It Can Be Tasted, But Not Explained."
+  quote: "Good Painting Is Like Good Cooking; It Can Be Tasted, But Not Explained.",
+  img: "https://ak3.picdn.net/shutterstock/videos/26238833/thumb/12.jpg"
 }, {
   author: "John",
-  quote: "I don't always eat out; but when I do I eat here"
+  quote: "I don't always eat out; but when I do I eat here",
+  img: "http://www.lakeplacid.com/f/styles/1440x700/public/photos/adk-restaurant-week.jpg?itok=1SH6toRX"
 }, {
   author: "Jill",
-  quote: "When I eat here I feel so golden"
+  quote: "When I eat here I feel so golden",
+  img: "http://www.stelizabeth.com/healthyheadlines/wp-content/uploads/2018/04/Eating-Well-at-Restaurants.jpg"
 }];
 
 var globalState = exports.globalState = {
@@ -215,9 +200,6 @@ var globalState = exports.globalState = {
   randomQuoteData: randomQuoteData,
   reviewStatus: {
     currentReview: 0
-  },
-  quoteStatus: {
-    currentQuote: 0
   }
 };
 
@@ -783,40 +765,52 @@ function RandomQuote(_ref) {
       actions = _ref.actions;
 
 
-  var quotes = function quotes() {
-    console.log(state.quoteStatus.currentQuote);
-    if (state.quoteStatus.currentQuote <= 2) {
-      actions.quotePicker();
-    } else if (state.quoteStatus.currentQuote == 2) {
-      actions.quoteReset();
-    }
-  };
+  var slideIndex = 0;
 
-  var quoteScroll = setInterval(quotes, 5000);
+  function slides() {
+    var i;
+    var quotes = document.getElementsByClassName("quote-slider");
+    for (i = 0; i < quotes.length; i++) {
+      quotes[i].style.display = "none";
+    }
+    slideIndex++;
+    if (slideIndex > quotes.length) {
+      slideIndex = 1;
+    }
+    quotes[slideIndex - 1].style.display = "block";
+  }
+
+  var quoteSlider = setInterval(slides, 3000);
 
   return (0, _hyperapp.h)(
-    'section',
-    { id: 'RandomQuote', style: {
-        backgroundImage: 'linear-gradient(135deg, rgba(0, 0, 0, .1) 0, #000 100%), url(https://static01.nyt.com/images/2018/03/01/dining/01COOKING-CHICKEN-CURRY1/01COOKING-CHICKEN-CURRY1-threeByTwoMediumAt2X.jpg)'
-      } },
-    (0, _hyperapp.h)(
-      'div',
-      { className: 'container' },
-      (0, _hyperapp.h)(
-        'h1',
-        null,
-        '"',
-        state.randomQuoteData[state.quoteStatus.currentQuote].quote,
-        '"'
-      ),
-      (0, _hyperapp.h)(
-        'span',
-        { className: 'author' },
-        '- ',
-        state.randomQuoteData[state.quoteStatus.currentQuote].author,
-        ' -'
-      )
-    )
+    "div",
+    { className: 'parent' },
+    state.randomQuoteData.map(function (item) {
+      return (0, _hyperapp.h)(
+        "section",
+        { id: 'RandomQuote', className: 'quote-slider fade', style: {
+            backgroundImage: "linear-gradient(135deg, rgba(0, 0, 0, .1) 0, #000 100%), url(" + item.img + ")"
+          } },
+        (0, _hyperapp.h)(
+          "div",
+          { className: 'container' },
+          (0, _hyperapp.h)(
+            "h1",
+            null,
+            "\"",
+            item.quote,
+            "\""
+          ),
+          (0, _hyperapp.h)(
+            "span",
+            { className: 'author' },
+            "- ",
+            item.author,
+            " -"
+          )
+        )
+      );
+    })
   );
 }
 
@@ -906,7 +900,7 @@ function Reviews(_ref) {
                 { className: 'row' },
                 (0, _hyperapp.h)(
                     'div',
-                    { className: 'col-md-8' },
+                    { className: 'col-md-7' },
                     (0, _hyperapp.h)(
                         'div',
                         { className: 'side-img' },
@@ -915,7 +909,7 @@ function Reviews(_ref) {
                 ),
                 (0, _hyperapp.h)(
                     'div',
-                    { className: 'col-md-4' },
+                    { className: 'col-md-5' },
                     currentReview(),
                     (0, _hyperapp.h)(
                         'div',

@@ -69,16 +69,19 @@ var randomQuoteData = [
   {
     author: "Charles",
     quote: "Good Painting Is Like Good Cooking; It Can Be Tasted, But Not Explained.", 
+    img: "https://ak3.picdn.net/shutterstock/videos/26238833/thumb/12.jpg"
   },
   {
     author: "John",
     quote: "I don't always eat out; but when I do I eat here", 
+    img: "http://www.lakeplacid.com/f/styles/1440x700/public/photos/adk-restaurant-week.jpg?itok=1SH6toRX"
   },
   {
     author: "Jill",
     quote: "When I eat here I feel so golden", 
+    img: "http://www.stelizabeth.com/healthyheadlines/wp-content/uploads/2018/04/Eating-Well-at-Restaurants.jpg"
   }
-]
+];
 
 
 export const globalState = {
@@ -89,8 +92,5 @@ export const globalState = {
   randomQuoteData,
   reviewStatus: {
     currentReview: 0,
-  },
-  quoteStatus: {
-    currentQuote: 0,
   }
 }

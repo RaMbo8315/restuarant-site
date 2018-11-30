@@ -38,12 +38,12 @@ export default function Reviews({ state, actions }) {
         <section id={'Reviews'}>
             <div className={'container'}>
                 <div className={'row'}>
-                    <div className={'col-md-8'}>
+                    <div className={'col-md-7'}>
                         <div className={'side-img'}>
                             <img src={'https://img-aws.ehowcdn.com/600x600p/photos.demandstudios.com/getty/article/85/121/skd181312sdc.jpg'} />
                         </div>
                     </div>
-                    <div className={'col-md-4'}>
+                    <div className={'col-md-5'}>
                         {currentReview()}
                         <div className={'arrows'}>
                             <i class={`fas fa-arrow-left ${(state.reviewStatus.currentReview > 0) 
